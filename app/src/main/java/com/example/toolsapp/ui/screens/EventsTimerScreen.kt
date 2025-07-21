@@ -211,7 +211,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
             onDismissRequest = {showCreateEventDialog = false},
             modifier = Modifier
                 .requiredSize(292.dp, 512.dp)
-                .background(MaterialTheme.colorScheme.primary)
+//                .background(MaterialTheme.colorScheme.primary)
         ) {
             var eventName by remember { mutableStateOf("") }
             var eventDate by remember { mutableStateOf(TextFieldValue("")) }
@@ -305,10 +305,10 @@ fun EventTimersScreen(onBack: () -> Unit) {
 
                         TimeInput(
                             timePickerState,
-                            colors = TimePickerDefaults.colors(
-                                timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
-                                timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                            ),
+//                            colors = TimePickerDefaults.colors(
+//                                timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
+//                                timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+//                            ),
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)
                         )
@@ -327,7 +327,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.cancel),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -357,7 +357,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.add),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -459,10 +459,10 @@ fun EditEventTimerDialog(
 
                 TimeInput(
                     timePickerState,
-                    colors = TimePickerDefaults.colors(
-                        timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
-                        timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                    ),
+//                    colors = TimePickerDefaults.colors(
+//                        timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
+//                        timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+//                    ),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                 )
@@ -486,7 +486,7 @@ fun EditEventTimerDialog(
                     Text(
                         text = stringResource(R.string.cancel),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -511,7 +511,7 @@ fun EditEventTimerDialog(
                     Text(
                         text = stringResource(R.string.edit),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -573,15 +573,15 @@ fun EventCard(
             )
             .padding(0.dp),
         border = if(isSelected) BorderStroke(4.dp, lightHighlightColor) else null,
-        colors = CardDefaults.cardColors(
-            containerColor = if(remainingTime > 0)
-                MaterialTheme.colorScheme.primaryContainer
-            else
-                MaterialTheme.colorScheme.primaryContainer.copy(
-                    red = MaterialTheme.colorScheme.primaryContainer.red * 1.2f
-                ),
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
+//        colors = CardDefaults.cardColors(
+//            containerColor = if(remainingTime > 0)
+//                MaterialTheme.colorScheme.primaryContainer
+//            else
+//                MaterialTheme.colorScheme.primaryContainer.copy(
+//                    red = MaterialTheme.colorScheme.primaryContainer.red * 1.2f
+//                ),
+//            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+//        )
     ) {
         Column(
             modifier = Modifier

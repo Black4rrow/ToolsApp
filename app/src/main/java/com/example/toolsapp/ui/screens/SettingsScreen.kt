@@ -64,7 +64,7 @@ fun SettingsScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(128.dp)
-                        .background(MaterialTheme.colorScheme.primaryContainer)
+//                        .background(MaterialTheme.colorScheme.primaryContainer)
                 ) {
                     items(allThemesTypes.size) { index ->
                         val theme: Theme = Theme.getTheme(allThemesTypes[index])

@@ -214,7 +214,7 @@ fun TodoScreen(onBack: () -> Unit) {
             onDismissRequest = {showCreateTaskDialog.value = false},
             modifier = Modifier
                 .requiredSize(288.dp, 512.dp)
-                .background(MaterialTheme.colorScheme.primary)
+//                .background(MaterialTheme.colorScheme.primary)
         ) {
             var taskName by remember { mutableStateOf("") }
             var canTaskExpire by remember { mutableStateOf(false) }
@@ -292,7 +292,7 @@ fun TodoScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.cancel),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -320,7 +320,7 @@ fun TodoScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.add),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )

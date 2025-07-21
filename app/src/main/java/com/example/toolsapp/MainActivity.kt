@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -213,11 +214,13 @@ fun MainApp() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(currentTitle) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                ),
+                title = { Text(
+                    text = currentTitle,
+                ) },
+//                colors = TopAppBarDefaults.topAppBarColors(
+//                    containerColor = MaterialTheme.colorScheme.primary,
+//                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+//                ),
                 navigationIcon = {
                     if (showBackButton) {
                         IconButton(
@@ -238,7 +241,7 @@ fun MainApp() {
         },
         bottomBar = {
             NavigationBar(
-                containerColor = MaterialTheme.colorScheme.primary
+//                containerColor = MaterialTheme.colorScheme.primary
             ) {
                 navigationItems.forEachIndexed{index, item ->
                     NavigationBarItem(
@@ -260,17 +263,17 @@ fun MainApp() {
                         label = {
                             Text(
                                 item.title,
-                                color = if(selectedNavigationIndex == index) {
-                                    MaterialTheme.colorScheme.onPrimary
-                                } else {
-                                    MaterialTheme.colorScheme.onPrimaryContainer
-                                }
+//                                color = if(selectedNavigationIndex == index) {
+//                                    MaterialTheme.colorScheme.onPrimary
+//                                } else {
+//                                    MaterialTheme.colorScheme.onPrimaryContainer
+//                                }
                             )
                         },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = MaterialTheme.colorScheme.primary,
-                            indicatorColor = MaterialTheme.colorScheme.onPrimary,
-                        )
+//                        colors = NavigationBarItemDefaults.colors(
+//                            selectedIconColor = MaterialTheme.colorScheme.primary,
+//                            indicatorColor = MaterialTheme.colorScheme.onPrimary,
+//                        )
                     )
                 }
             }

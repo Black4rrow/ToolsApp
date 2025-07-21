@@ -86,6 +86,7 @@ fun ToolsScreen(
                 Text(stringResource(R.string.choose_mode))
 
                 SingleChoiceSegmentedButtonRow(
+
                 ) {
                     options.forEachIndexed{index, label ->
                         SegmentedButton(
@@ -116,9 +117,9 @@ fun ToolsScreen(
                                     }
                                 }
                             },
-                            colors = SegmentedButtonDefaults.colors(
-                                inactiveContainerColor = MaterialTheme.colorScheme.primary
-                            )
+//                            colors = SegmentedButtonDefaults.colors(
+//                                inactiveContainerColor = MaterialTheme.colorScheme.primary
+//                            )
                         )
                     }
                 }
