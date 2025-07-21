@@ -62,8 +62,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.toolsapp.R
 import com.example.toolsapp.model.TodoItem
 import com.example.toolsapp.ui.components.MyDatePicker
-import com.example.toolsapp.ui.viewModels.TodoViewModel
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.TodoViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.ZoneOffset

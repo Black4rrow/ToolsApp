@@ -24,7 +24,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModelProvider
 import com.example.toolsapp.R
 import com.example.toolsapp.model.classes.AppSettingsManager
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 
 @Composable
 fun ProfileScreen() {

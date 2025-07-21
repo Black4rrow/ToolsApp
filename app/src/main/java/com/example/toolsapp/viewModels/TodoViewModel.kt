@@ -1,4 +1,4 @@
-package com.example.toolsapp.ui.viewModels
+package com.example.toolsapp.viewModels
 
 import androidx.lifecycle.ViewModel
 import com.example.toolsapp.model.TodoItem

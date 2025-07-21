@@ -1,33 +1,34 @@
 package com.example.toolsapp.model.classes
 
+import androidx.compose.runtime.Composable
 import com.example.toolsapp.R
 
 interface DestinationItem{
     val route: String
-    val title: String
+    var title: String
     val iconId: Int
 }
 
 sealed class Destination(override val route: String): DestinationItem {
     data object Profile : Destination("profile") {
-        override val title: String = "Profil"
+        override var title: String = "Profil"
         override val iconId: Int = R.drawable.ic_launcher_foreground
     }
 
     data object ToolsList : Destination("tools_list") {
-        override val title: String = "Accueil"
+        override var title: String = "Accueil"
         override val iconId: Int = R.drawable.ic_launcher_foreground
     }
 
     data object Settings : Destination("settings") {
-        override val title: String = "Paramètres"
+        override var title: String = "Paramètres"
         override val iconId: Int = R.drawable.ic_launcher_foreground
     }
 }
 
 sealed class ToolsDestination(
     override val route: String,
-    override val title: String,
+    override var title: String,
     override val iconId: Int,
     val requireConnection: Boolean,
 ) : DestinationItem {

@@ -72,8 +72,8 @@ import com.example.toolsapp.model.EventTimer
 import com.example.toolsapp.ui.components.MyDatePicker
 import com.example.toolsapp.ui.components.MyTextFieldColors
 import com.example.toolsapp.ui.theme.lightHighlightColor
-import com.example.toolsapp.ui.viewModels.EventTimersViewModel
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.EventTimersViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -549,14 +549,10 @@ fun EventCard(
     )
 
     LaunchedEffect(key1 = evenTimerViewModel.aTimerWasUpdated) {
-        evenTimerViewModel.aTimerWasUpdated = false
+        evenTimerViewModel.resetUpdateFlag()
         while(remainingTime > 0){
             kotlinx.coroutines.delay(1000)
             remainingTime = eventTimer.getRemainingTime()
-        }
-
-        if(eventTimer.loopMode != "NONE") {
-            evenTimerViewModel.rescheduleEventTimer(context, eventTimer)
         }
     }
 
