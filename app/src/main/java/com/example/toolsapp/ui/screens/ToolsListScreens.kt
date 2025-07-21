@@ -6,10 +6,16 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
@@ -62,50 +69,62 @@ fun ToolsScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.1f)
-        ){
-            val options = listOf("MAP", "LIST")
-
-            SingleChoiceSegmentedButtonRow(
-                modifier = Modifier
-                    .align(Alignment.Center)
-            ) {
-                options.forEachIndexed{index, label ->
-                    SegmentedButton(
-                        shape = SegmentedButtonDefaults.itemShape(
-                            index = index,
-                            count = options.size
-                        ),
-                        onClick = { selectedIndex = index },
-                        selected = index == selectedIndex,
-                        label = {
-                            Row(verticalAlignment = Alignment.CenterVertically){
-                                when(label){
-                                    "MAP" -> {
-                                        Text(stringResource(R.string.map_label))
-                                        Spacer(modifier = Modifier.width(16.dp))
-                                        Image(painter = painterResource(R.drawable.map), contentDescription = "Map icon")
-                                    }
-
-                                    "LIST" -> {
-                                        Text(stringResource(R.string.list_label))
-                                        Spacer(modifier = Modifier.width(16.dp))
-                                        Image(painter = painterResource(R.drawable.view_list), contentDescription = "List icon")
-                                    }
-                                }
-                            }
-                        }
-                    )
-                }
-            }
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.9f)
+                .weight(1f)
                 .clipToBounds()
         ){
-            if(selectedIndex == 0){
+            val options = listOf("LIST", "MAP")
+
+            Column(
+                Modifier
+                    .padding(top = 16.dp)
+                    .clip(shape = ShapeDefaults.Large)
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = .9f))
+                    .zIndex(1f)
+                    .align(Alignment.TopCenter)
+                    .padding(16.dp)
+            ){
+                Text(stringResource(R.string.choose_mode))
+
+                SingleChoiceSegmentedButtonRow(
+                ) {
+                    options.forEachIndexed{index, label ->
+                        SegmentedButton(
+                            shape = SegmentedButtonDefaults.itemShape(
+                                index = index,
+                                count = options.size
+                            ),
+                            onClick = { selectedIndex = index },
+                            selected = index == selectedIndex,
+                            label = {
+                                Row(verticalAlignment = Alignment.CenterVertically){
+                                    when(label){
+                                        "MAP" -> {
+                                            if (index != selectedIndex) {
+                                                Image(painter = painterResource(R.drawable.map), contentDescription = "Map icon")
+                                                Spacer(modifier = Modifier.width(16.dp))
+                                            }
+                                            Text(stringResource(R.string.map_label))
+                                        }
+
+                                        "LIST" -> {
+                                            if (index != selectedIndex) {
+                                                Image(painter = painterResource(R.drawable.view_list), contentDescription = "List icon")
+                                                Spacer(modifier = Modifier.width(16.dp))
+                                            }
+                                            Text(stringResource(R.string.list_label))
+                                        }
+                                    }
+                                }
+                            },
+                            colors = SegmentedButtonDefaults.colors(
+                                inactiveContainerColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+                }
+            }
+
+            if(selectedIndex == 1){
                 ToolsMapScreen(
                     tools = tools,
                     onToolClick = onToolClick,
@@ -129,7 +148,22 @@ fun ToolsListScreen(
     onToolClick: (ToolsDestination) -> Unit,
     theme: Theme
 ){
-
+    LazyVerticalGrid(
+        modifier = Modifier
+            .padding(top = 128.dp)
+            .fillMaxSize(),
+        columns = GridCells.Adaptive(minSize = 128.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(16.dp)
+    ){
+        items(tools) { tool ->
+            ToolCard(
+                tool,
+                onClick = onToolClick
+            )
+        }
+    }
 }
 
 @Composable
@@ -264,5 +298,33 @@ fun ToolsMapScreen(
             )
         }
     }
+}
 
+@Composable
+fun ToolCard(
+    tool: ToolsDestination,
+    onClick: (ToolsDestination) -> Unit,
+){
+    Card(
+        modifier = Modifier
+            .fillMaxSize()
+            .aspectRatio(1f)
+            .clickable { onClick(tool) }
+    ) {
+        Box(modifier = Modifier.fillMaxSize()){
+            Icon(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.Center)
+                    .size(48.dp),
+                painter = painterResource(tool.iconId),
+                contentDescription = "${tool.title} icon",
+            )
+            Text(
+                modifier = Modifier
+                .align(Alignment.TopCenter),
+                text = tool.title
+            )
+        }
+    }
 }

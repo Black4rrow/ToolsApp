@@ -63,4 +63,5 @@
     <string name="spawn_frequency">Spawn frequency</string>
     <string name="map_label">Map</string>
     <string name="list_label">List</string>
+    <string name="choose_mode">Choose a mode</string>
 </resources>
