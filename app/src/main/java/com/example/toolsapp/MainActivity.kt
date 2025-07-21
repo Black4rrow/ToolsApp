@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -66,7 +67,7 @@ import com.example.toolsapp.ui.screens.ProfileScreen
 import com.example.toolsapp.ui.screens.SettingsScreen
 import com.example.toolsapp.ui.screens.TodoScreen
 import com.example.toolsapp.ui.screens.ToolsScreen
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
@@ -187,6 +188,7 @@ fun MainApp() {
         )
     )
 
+    
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -207,17 +209,19 @@ fun MainApp() {
         *ToolsDestination.all.toTypedArray()
     )
 
+    allDestinations[0].title = navigationItems[0].title
+    allDestinations[1].title = navigationItems[1].title
+    allDestinations[2].title = navigationItems[2].title
+
     val routeTitles = allDestinations.associate { it.route to it.title }
     val currentTitle = currentRoute?.let { routeTitles[it] } ?: "Mon Application"
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(currentTitle) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                ),
+                title = { Text(
+                    text = currentTitle,
+                ) },
                 navigationIcon = {
                     if (showBackButton) {
                         IconButton(
@@ -238,7 +242,6 @@ fun MainApp() {
         },
         bottomBar = {
             NavigationBar(
-                containerColor = MaterialTheme.colorScheme.primary
             ) {
                 navigationItems.forEachIndexed{index, item ->
                     NavigationBarItem(
@@ -246,9 +249,7 @@ fun MainApp() {
                         onClick = {
                             selectedNavigationIndex = index
                             navController.navigate(item.route) {
-//                                popUpTo(navController.graph.findStartDestination().id) {
-//                                    saveState = true
-//                                }
+
                                 popUpTo(item.route) { inclusive = true }
                                 launchSingleTop = true
                                 restoreState = true
@@ -260,17 +261,8 @@ fun MainApp() {
                         label = {
                             Text(
                                 item.title,
-                                color = if(selectedNavigationIndex == index) {
-                                    MaterialTheme.colorScheme.onPrimary
-                                } else {
-                                    MaterialTheme.colorScheme.onPrimaryContainer
-                                }
                             )
                         },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = MaterialTheme.colorScheme.primary,
-                            indicatorColor = MaterialTheme.colorScheme.onPrimary,
-                        )
                     )
                 }
             }

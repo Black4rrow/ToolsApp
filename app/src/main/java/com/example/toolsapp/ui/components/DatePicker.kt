@@ -75,14 +75,14 @@ fun MyDatePicker(dateParam: TextFieldValue = TextFieldValue(""), shouldShow: Boo
                 modifier = Modifier.clickable { showDatePicker = true }
             )
         },
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-            focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-            focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-            cursorColor = MaterialTheme.colorScheme.onPrimary,
-            unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer
-        ),
+//        colors = OutlinedTextFieldDefaults.colors(
+//            focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+//            focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+//            focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+//            cursorColor = MaterialTheme.colorScheme.onPrimary,
+//            unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+//            focusedContainerColor = MaterialTheme.colorScheme.primaryContainer
+//        ),
     )
 
     if (showDatePicker) {

@@ -1,4 +1,4 @@
-package com.example.toolsapp.ui.viewModels
+package com.example.toolsapp.viewModels
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
@@ -27,8 +27,8 @@ class UserViewModel : ViewModel() {
         signInOrCreateUserWithEmailAndPassword(email, password, onSuccess, onFailure)
     }
 
-    fun getCurrentUserId(): String? {
-        return auth.currentUser?.uid
+    fun getCurrentUserId(): String {
+        return auth.currentUser?.uid ?: "1"
     }
 
     private fun signInOrCreateUserWithEmailAndPassword(

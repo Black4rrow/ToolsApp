@@ -31,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthException
 
@@ -80,12 +80,12 @@ fun LoginScreen(
                     .fillMaxWidth()
                 ,
                 isError = invalidEmail,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedContainerColor = MaterialTheme.colorScheme.tertiary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
-                    errorContainerColor = MaterialTheme.colorScheme.secondary,
-                )
+//                colors = OutlinedTextFieldDefaults.colors(
+//                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+//                    focusedContainerColor = MaterialTheme.colorScheme.tertiary,
+//                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
+//                    errorContainerColor = MaterialTheme.colorScheme.secondary,
+//                )
             )
             if(invalidEmail){
                 Text(
@@ -119,12 +119,12 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 isError = invalidPassword,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedContainerColor = MaterialTheme.colorScheme.tertiary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
-                    errorContainerColor = MaterialTheme.colorScheme.secondary,
-                )
+//                colors = OutlinedTextFieldDefaults.colors(
+//                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+//                    focusedContainerColor = MaterialTheme.colorScheme.tertiary,
+//                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
+//                    errorContainerColor = MaterialTheme.colorScheme.secondary,
+//                )
             )
             if(invalidPassword){
                 Text(
@@ -184,7 +184,7 @@ fun LoginScreen(
                     .height(64.dp)
                     .fillMaxWidth()
                     .padding(0.dp,31.dp,0.dp,31.dp),
-                color = MaterialTheme.colorScheme.onPrimary,
+//                color = MaterialTheme.colorScheme.onPrimary,
                 shape = CircleShape
             ){}
         }

@@ -62,8 +62,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.toolsapp.R
 import com.example.toolsapp.model.TodoItem
 import com.example.toolsapp.ui.components.MyDatePicker
-import com.example.toolsapp.ui.viewModels.TodoViewModel
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.TodoViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -214,7 +214,7 @@ fun TodoScreen(onBack: () -> Unit) {
             onDismissRequest = {showCreateTaskDialog.value = false},
             modifier = Modifier
                 .requiredSize(288.dp, 512.dp)
-                .background(MaterialTheme.colorScheme.primary)
+//                .background(MaterialTheme.colorScheme.primary)
         ) {
             var taskName by remember { mutableStateOf("") }
             var canTaskExpire by remember { mutableStateOf(false) }
@@ -292,7 +292,7 @@ fun TodoScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.cancel),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -320,7 +320,7 @@ fun TodoScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.add),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )

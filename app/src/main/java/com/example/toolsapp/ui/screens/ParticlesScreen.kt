@@ -580,12 +580,12 @@ fun MySlider(
         onValueChange = onValueChange,
         valueRange = valueRange,
         steps = steps,
-        colors = SliderDefaults.colors(
-            activeTrackColor = MaterialTheme.colorScheme.onPrimary,
-            inactiveTrackColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
-            activeTickColor = Color.Transparent,
-            inactiveTickColor = Color.Transparent,
-        ),
+//        colors = SliderDefaults.colors(
+//            activeTrackColor = MaterialTheme.colorScheme.onPrimary,
+//            inactiveTrackColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
+//            activeTickColor = Color.Transparent,
+//            inactiveTickColor = Color.Transparent,
+//        ),
     )
 }
 

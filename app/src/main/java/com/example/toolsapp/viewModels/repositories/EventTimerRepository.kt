@@ -1,4 +1,4 @@
-package com.example.toolsapp.ui.viewModels
+package com.example.toolsapp.viewModels.repositories
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import androidx.lifecycle.ViewModel
 import com.example.toolsapp.model.EventTimer
 import com.example.toolsapp.model.EventTimerNotificationReceiver
 import com.google.firebase.Firebase
@@ -15,24 +14,30 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
-
-class EventTimersViewModel () : ViewModel(){
+class EventTimerRepository {
     private val database: FirebaseDatabase = Firebase.database
     private val myRef = database.getReference("evenTimers")
 
-    var aTimerWasUpdated = false
+    private val _aTimerWasUpdated = MutableStateFlow(false)
+    val aTimerWasUpdated: StateFlow<Boolean> = _aTimerWasUpdated
 
     fun addEventTimer(eventTimer: EventTimer) {
         val itemId = eventTimer.id.toString()
         itemId.let {
             myRef.child(it).setValue(eventTimer)
         }
-        aTimerWasUpdated = true
+        _aTimerWasUpdated.value = true
+    }
+
+    fun resetUpdateFlag() {
+        _aTimerWasUpdated.value = false
     }
 
     fun getEventTimers(userId: String, onDataChange: (List<EventTimer>) -> Unit) {
@@ -61,22 +66,12 @@ class EventTimersViewModel () : ViewModel(){
     fun updateEventTimer(evenTimer: EventTimer) {
         val itemId = evenTimer.id.toString()
         myRef.child(itemId).setValue(evenTimer)
-        aTimerWasUpdated = true
+        _aTimerWasUpdated.value = true
     }
 
     fun deleteEventTimer(eventTimerId: String) {
         myRef.child(eventTimerId).removeValue()
-        aTimerWasUpdated = true
-    }
-
-    fun rescheduleEventTimer(context: Context, eventTimer: EventTimer) {
-        if(eventTimer.loopMode == "NONE") return
-
-        val newEndDate = eventTimer.calculateNextEndDate()
-        val updatedEventTimer = eventTimer.copy(endDate = newEndDate)
-
-        updateEventTimer(updatedEventTimer)
-        createEventTimerNotification(context, updatedEventTimer)
+        _aTimerWasUpdated.value = true
     }
 
     fun createEventTimerNotification(context: Context, eventTimer: EventTimer) {
@@ -92,6 +87,7 @@ class EventTimersViewModel () : ViewModel(){
 
         val intent = Intent(context, EventTimerNotificationReceiver::class.java)
         intent.putExtra("eventTimerTitle", eventTimer.title)
+        intent.putExtra("eventTimer", eventTimer)
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,

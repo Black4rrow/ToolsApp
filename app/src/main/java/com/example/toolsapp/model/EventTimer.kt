@@ -1,8 +1,11 @@
 package com.example.toolsapp.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Parcelize
 data class EventTimer(
     val id: Int = 0,
     var title: String = "Unnamed",
@@ -11,7 +14,7 @@ data class EventTimer(
     var endHour: String = "",
     var endMinute: String = "",
     val userId: String = ""
-) {
+): Parcelable {
     fun getRemainingTime(): Long {
         if (endDate.isEmpty() || endHour.isEmpty() || endMinute.isEmpty()) return 0L
 

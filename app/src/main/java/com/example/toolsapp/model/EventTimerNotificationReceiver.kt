@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.toolsapp.R
+import com.example.toolsapp.viewModels.repositories.EventTimerRepository
 
 class EventTimerNotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -27,6 +28,18 @@ class EventTimerNotificationReceiver : BroadcastReceiver() {
         notificationManager.createNotificationChannel(channel)
 
         val eventTimerTitle = intent.getStringExtra("eventTimerTitle")
+        val eventTimer:EventTimer = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("eventTimer", EventTimer::class.java)
+        }else{
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra("eventTimer")
+        } ?: return
+        if (eventTimer != null) {
+            val rescheduleIntent = Intent(context, RescheduleReceiver::class.java).apply {
+                putExtra("eventTimer", eventTimer)
+            }
+            context.sendBroadcast(rescheduleIntent)
+        }
 
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -35,5 +48,26 @@ class EventTimerNotificationReceiver : BroadcastReceiver() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         notificationManager.notify(0, notificationBuilder.build())
+    }
+}
+
+
+class RescheduleReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        val eventTimerRepository = EventTimerRepository()
+        val eventTimer:EventTimer = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("eventTimer", EventTimer::class.java)
+        }else{
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra("eventTimer")
+        } ?: return
+
+        if (eventTimer.loopMode == "NONE") return
+
+        val newEndDate = eventTimer.calculateNextEndDate()
+        val updatedEventTimer = eventTimer.copy(endDate = newEndDate)
+
+        eventTimerRepository.updateEventTimer(updatedEventTimer)
+        eventTimerRepository.createEventTimerNotification(context, updatedEventTimer)
     }
 }

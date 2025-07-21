@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,10 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.toolsapp.R
 import com.example.toolsapp.model.classes.AppSettingsManager
-import com.example.toolsapp.ui.viewModels.SettingsViewModel
 import com.example.toolsapp.model.classes.Theme
 import com.example.toolsapp.model.classes.ToolsThemeTypes
-import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen() {
@@ -64,7 +61,7 @@ fun SettingsScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(128.dp)
-                        .background(MaterialTheme.colorScheme.primaryContainer)
+//                        .background(MaterialTheme.colorScheme.primaryContainer)
                 ) {
                     items(allThemesTypes.size) { index ->
                         val theme: Theme = Theme.getTheme(allThemesTypes[index])

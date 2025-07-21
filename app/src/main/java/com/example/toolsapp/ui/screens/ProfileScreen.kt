@@ -24,7 +24,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModelProvider
 import com.example.toolsapp.R
 import com.example.toolsapp.model.classes.AppSettingsManager
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 
 @Composable
 fun ProfileScreen() {
@@ -179,12 +179,12 @@ fun ChangePseudoDialog(
                     pseudo = newPseudo
                 },
                 label = { Text(stringResource(R.string.username_label)) },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                    cursorColor = MaterialTheme.colorScheme.onPrimary
-                ),
+//                colors = OutlinedTextFieldDefaults.colors(
+//                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+//                    focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+//                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+//                    cursorColor = MaterialTheme.colorScheme.onPrimary
+//                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
@@ -200,7 +200,7 @@ fun ChangePseudoDialog(
                         modifier = Modifier
                             .padding(start = 8.dp),
                         textAlign = TextAlign.Start,
-                        color = MaterialTheme.colorScheme.onPrimary
+//                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
                 TextButton(onClick = {
@@ -210,7 +210,7 @@ fun ChangePseudoDialog(
                         modifier = Modifier
                             .padding(end = 8.dp),
                         textAlign = TextAlign.End,
-                        color = MaterialTheme.colorScheme.onPrimary
+//                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }

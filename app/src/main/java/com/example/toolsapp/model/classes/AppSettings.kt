@@ -1,6 +1,6 @@
 package com.example.toolsapp.model.classes
 
-import com.example.toolsapp.ui.viewModels.SettingsViewModel
+import com.example.toolsapp.viewModels.PreferencesViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -8,18 +8,18 @@ object AppSettingsManager {
     var settings: Settings = Settings()
         private set
 
-    private val settingsViewModel = SettingsViewModel()
+    private val preferencesViewModel = PreferencesViewModel()
 
     fun updateSelectedTheme(theme: ToolsThemeTypes) {settings.selectedTheme = theme}
     fun updateUserId(userId: String){settings.userId = userId}
 
     fun saveSettings() {
         updateUserId(FirebaseAuth.getInstance().currentUser!!.uid)
-        settingsViewModel.saveToDatabase(settings.userId, settings)
+        preferencesViewModel.saveSettingsToDatabase(settings.userId, settings)
     }
 
     fun loadSettings(userId: String, onLoaded: () -> Unit) {
-        settingsViewModel.loadFromDatabase(userId) { loadedSettings ->
+        preferencesViewModel.loadSettingsFromDatabase(userId) { loadedSettings ->
             settings = loadedSettings
             onLoaded()
         }

@@ -72,8 +72,8 @@ import com.example.toolsapp.model.EventTimer
 import com.example.toolsapp.ui.components.MyDatePicker
 import com.example.toolsapp.ui.components.MyTextFieldColors
 import com.example.toolsapp.ui.theme.lightHighlightColor
-import com.example.toolsapp.ui.viewModels.EventTimersViewModel
-import com.example.toolsapp.ui.viewModels.UserViewModel
+import com.example.toolsapp.viewModels.EventTimersViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -211,7 +211,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
             onDismissRequest = {showCreateEventDialog = false},
             modifier = Modifier
                 .requiredSize(292.dp, 512.dp)
-                .background(MaterialTheme.colorScheme.primary)
+//                .background(MaterialTheme.colorScheme.primary)
         ) {
             var eventName by remember { mutableStateOf("") }
             var eventDate by remember { mutableStateOf(TextFieldValue("")) }
@@ -305,10 +305,10 @@ fun EventTimersScreen(onBack: () -> Unit) {
 
                         TimeInput(
                             timePickerState,
-                            colors = TimePickerDefaults.colors(
-                                timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
-                                timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                            ),
+//                            colors = TimePickerDefaults.colors(
+//                                timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
+//                                timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+//                            ),
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)
                         )
@@ -327,7 +327,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.cancel),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -357,7 +357,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
                     Text(
                         text = stringResource(R.string.add),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -459,10 +459,10 @@ fun EditEventTimerDialog(
 
                 TimeInput(
                     timePickerState,
-                    colors = TimePickerDefaults.colors(
-                        timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
-                        timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                    ),
+//                    colors = TimePickerDefaults.colors(
+//                        timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
+//                        timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+//                    ),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                 )
@@ -486,7 +486,7 @@ fun EditEventTimerDialog(
                     Text(
                         text = stringResource(R.string.cancel),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -511,7 +511,7 @@ fun EditEventTimerDialog(
                     Text(
                         text = stringResource(R.string.edit),
                         modifier = Modifier,
-                        color = MaterialTheme.colorScheme.onPrimary,
+//                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         )
@@ -549,14 +549,10 @@ fun EventCard(
     )
 
     LaunchedEffect(key1 = evenTimerViewModel.aTimerWasUpdated) {
-        evenTimerViewModel.aTimerWasUpdated = false
+        evenTimerViewModel.resetUpdateFlag()
         while(remainingTime > 0){
             kotlinx.coroutines.delay(1000)
             remainingTime = eventTimer.getRemainingTime()
-        }
-
-        if(eventTimer.loopMode != "NONE") {
-            evenTimerViewModel.rescheduleEventTimer(context, eventTimer)
         }
     }
 
@@ -573,15 +569,15 @@ fun EventCard(
             )
             .padding(0.dp),
         border = if(isSelected) BorderStroke(4.dp, lightHighlightColor) else null,
-        colors = CardDefaults.cardColors(
-            containerColor = if(remainingTime > 0)
-                MaterialTheme.colorScheme.primaryContainer
-            else
-                MaterialTheme.colorScheme.primaryContainer.copy(
-                    red = MaterialTheme.colorScheme.primaryContainer.red * 1.2f
-                ),
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
+//        colors = CardDefaults.cardColors(
+//            containerColor = if(remainingTime > 0)
+//                MaterialTheme.colorScheme.primaryContainer
+//            else
+//                MaterialTheme.colorScheme.primaryContainer.copy(
+//                    red = MaterialTheme.colorScheme.primaryContainer.red * 1.2f
+//                ),
+//            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+//        )
     ) {
         Column(
             modifier = Modifier

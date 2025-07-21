@@ -1,14 +1,21 @@
 package com.example.toolsapp.ui.screens
 
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarBorder
+import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -18,7 +25,10 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -30,16 +40,19 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -47,12 +60,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.lifecycle.ViewModelProvider
 import com.example.toolsapp.model.classes.Theme
 import com.example.toolsapp.model.classes.ToolsDestination
 import kotlin.random.Random
 import com.example.toolsapp.R
 import com.example.toolsapp.model.Utils
+import com.example.toolsapp.model.advancedShadow
 import com.example.toolsapp.model.classes.AppSettingsManager
+import com.example.toolsapp.viewModels.PreferencesViewModel
+import com.example.toolsapp.viewModels.UserViewModel
 
 @Composable
 fun ToolsScreen(
@@ -61,6 +78,16 @@ fun ToolsScreen(
 ) {
     val theme: Theme = Theme.getTheme(AppSettingsManager.settings.selectedTheme)
     var selectedIndex by remember { mutableStateOf(0) }
+
+    val context= LocalActivity.current as ComponentActivity
+    val preferencesViewModel = ViewModelProvider(context)[PreferencesViewModel::class.java]
+    val userViewModel = ViewModelProvider(context)[UserViewModel::class.java]
+
+    val favoriteTools by preferencesViewModel.favoriteTools.collectAsState()
+
+    LaunchedEffect(Unit) {
+        preferencesViewModel.observeToolsFavorites(userViewModel.getCurrentUserId())
+    }
 
     Column(
         modifier = Modifier
@@ -86,6 +113,7 @@ fun ToolsScreen(
                 Text(stringResource(R.string.choose_mode))
 
                 SingleChoiceSegmentedButtonRow(
+
                 ) {
                     options.forEachIndexed{index, label ->
                         SegmentedButton(
@@ -117,7 +145,7 @@ fun ToolsScreen(
                                 }
                             },
                             colors = SegmentedButtonDefaults.colors(
-                                inactiveContainerColor = MaterialTheme.colorScheme.primary
+                                inactiveContainerColor = MaterialTheme.colorScheme.onPrimary
                             )
                         )
                     }
@@ -134,7 +162,11 @@ fun ToolsScreen(
                 ToolsListScreen(
                     tools = tools,
                     onToolClick = onToolClick,
-                    theme = theme
+                    theme = theme,
+                    favoriteTools = favoriteTools,
+                    onToggleFavorite = { toolName ->
+                        preferencesViewModel.toggleToolFavorite(userViewModel.getCurrentUserId(), toolName)
+                    }
                 )
             }
         }
@@ -146,7 +178,9 @@ fun ToolsScreen(
 fun ToolsListScreen(
     tools: List<ToolsDestination>,
     onToolClick: (ToolsDestination) -> Unit,
-    theme: Theme
+    theme: Theme,
+    favoriteTools: List<String>,
+    onToggleFavorite: (String) -> Unit
 ){
     LazyVerticalGrid(
         modifier = Modifier
@@ -157,10 +191,14 @@ fun ToolsListScreen(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp)
     ){
-        items(tools) { tool ->
+        val sortedTools = tools.sortedWith(compareBy ({ it.title !in favoriteTools }, {it.title}))
+
+        items(sortedTools) { tool ->
             ToolCard(
                 tool,
-                onClick = onToolClick
+                onClick = onToolClick,
+                isFavorite = tool.title in favoriteTools,
+                onToggleFavorite = onToggleFavorite
             )
         }
     }
@@ -304,27 +342,60 @@ fun ToolsMapScreen(
 fun ToolCard(
     tool: ToolsDestination,
     onClick: (ToolsDestination) -> Unit,
+    isFavorite: Boolean,
+    onToggleFavorite: (String) -> Unit
 ){
     Card(
         modifier = Modifier
             .fillMaxSize()
             .aspectRatio(1f)
             .clickable { onClick(tool) }
+            .advancedShadow(color = Color.Black, shadowBlurRadius = 8.dp, cornersRadius = 8.dp, offsetX = 4.dp, offsetY = 4.dp, alpha = .25f)
     ) {
-        Box(modifier = Modifier.fillMaxSize()){
-            Icon(
+        Box(modifier = Modifier.fillMaxSize()) {
+            Row(
                 modifier = Modifier
-                    .padding(16.dp)
-                    .align(Alignment.Center)
-                    .size(48.dp),
-                painter = painterResource(tool.iconId),
-                contentDescription = "${tool.title} icon",
-            )
-            Text(
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .align(Alignment.TopEnd),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .clickable(
+                            onClick = { onToggleFavorite(tool.title) },
+                            indication = ripple(bounded = true, radius = 32.dp),
+                            interactionSource = remember { MutableInteractionSource() }
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Filled.Star
+                        else Icons.Filled.StarBorder,
+                        contentDescription = "Is Favorite icon",
+                        modifier = Modifier.size(32.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            Column(
                 modifier = Modifier
-                .align(Alignment.TopCenter),
-                text = tool.title
-            )
+                    .fillMaxSize()
+                    .padding(8.dp)
+                    .align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    modifier = Modifier.size(48.dp),
+                    painter = painterResource(tool.iconId),
+                    contentDescription = "${tool.title} icon"
+                )
+                Text(text = tool.title)
+            }
         }
     }
 }
