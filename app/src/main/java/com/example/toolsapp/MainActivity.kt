@@ -188,6 +188,7 @@ fun MainApp() {
         )
     )
 
+    
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
