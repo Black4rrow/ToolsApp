@@ -2,7 +2,7 @@
     <string name="app_name">ToolsApp</string>
     <string name="home_nav">Home</string>
     <string name="settings_nav">Settings</string>
-    <string name="profile_nav">Tools</string>
+    <string name="profile_nav">Profile</string>
     <string name="choose_theme">Choose a theme</string>
     <string name="create_task">Create new task</string>
     <string name="task_name_label">Task name :</string>
@@ -64,4 +64,19 @@
     <string name="map_label">Map</string>
     <string name="list_label">List</string>
     <string name="choose_mode">Choose a mode</string>
+    <string name="no_name" translatable="false">Unknow</string>
+    <string name="todo_title" translatable="false">Todo</string>
+    <string name="event_timer_title">Events timers</string>
+    <string name="particles_title">Particles</string>
+    <string name="frenzy_clicker_title" translatable="false">FrenzyClicker</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="bot">Bot</string>
+    <string name="hard">Hard</string>
+    <string name="extreme">Extreme</string>
+    <string name="impossible">Impossible</string>
+    <string name="demon">Demon</string>
+    <string name="godly">Godly</string>
+    <string name="choose_difficulty">Choose a difficulty</string>
+    <string name="unknow" translatable="false">unknow</string>
 </resources>

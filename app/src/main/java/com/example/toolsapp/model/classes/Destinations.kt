@@ -29,14 +29,16 @@ sealed class Destination(override val route: String): DestinationItem {
 sealed class ToolsDestination(
     override val route: String,
     override var title: String,
+    val titleRessourceId: Int = R.string.no_name,
     override val iconId: Int,
     val requireConnection: Boolean,
 ) : DestinationItem {
-    data object EventTimers : ToolsDestination("event_timers", "Event Timers", R.drawable.timer, true)
-    data object TodoList : ToolsDestination("todo", "Todo", R.drawable.checklist, true)
-    data object Particles : ToolsDestination("particles", "Particles", R.drawable.drag_indicator, false)
+    data object EventTimers : ToolsDestination("event_timers", "Event Timers",R.string.event_timer_title, R.drawable.timer, true)
+    data object TodoList : ToolsDestination("todo", "Todo",R.string.todo_title, R.drawable.checklist, true)
+    data object Particles : ToolsDestination("particles", "Particles",R.string.particles_title, R.drawable.particles, false)
+    data object FrenzyClicker : ToolsDestination("frenzy_clicker", "FrenzyClicker", R.string.frenzy_clicker_title, R.drawable.frenzy_clicker, false)
 
     companion object {
-        val all by lazy { listOf(EventTimers, TodoList, Particles) }
+        val all by lazy { listOf(EventTimers, TodoList, Particles, FrenzyClicker) }
     }
 }

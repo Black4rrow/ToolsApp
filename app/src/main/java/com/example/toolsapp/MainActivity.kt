@@ -62,6 +62,7 @@ import com.example.toolsapp.model.classes.AppSettingsManager
 import com.example.toolsapp.model.classes.Destination
 import com.example.toolsapp.model.classes.ToolsDestination
 import com.example.toolsapp.ui.screens.EventTimersScreen
+import com.example.toolsapp.ui.screens.FrenzyClickerScreen
 import com.example.toolsapp.ui.screens.ParticleScreen
 import com.example.toolsapp.ui.screens.ProfileScreen
 import com.example.toolsapp.ui.screens.SettingsScreen
@@ -188,7 +189,6 @@ fun MainApp() {
         )
     )
 
-    
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -308,6 +308,12 @@ fun MainApp() {
 
             composable(ToolsDestination.Particles.route) {
                 ParticleScreen(
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(ToolsDestination.FrenzyClicker.route) {
+                FrenzyClickerScreen(
                     onBack = { navController.popBackStack() }
                 )
             }

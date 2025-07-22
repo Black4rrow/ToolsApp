@@ -64,4 +64,15 @@
     <string name="map_label">Carte</string>
     <string name="list_label">Liste</string>
     <string name="choose_mode">Choisissez un mode</string>
+    <string name="event_timer_title">Rappels d\'évènements</string>
+    <string name="particles_title">Particules</string>
+    <string name="easy">Facile</string>
+    <string name="medium">Normal</string>
+    <string name="bot">Ordinateur</string>
+    <string name="hard">Difficile</string>
+    <string name="extreme">Extrême</string>
+    <string name="impossible">Impossible</string>
+    <string name="demon">Démon</string>
+    <string name="godly">Divin</string>
+    <string name="choose_difficulty">Choisissez une difficulté</string>
 </resources>

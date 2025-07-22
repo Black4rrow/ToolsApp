@@ -1,9 +1,11 @@
 package com.example.toolsapp.ui.screens
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -17,6 +19,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -113,7 +116,6 @@ fun ToolsScreen(
                 Text(stringResource(R.string.choose_mode))
 
                 SingleChoiceSegmentedButtonRow(
-
                 ) {
                     options.forEachIndexed{index, label ->
                         SegmentedButton(
@@ -152,7 +154,7 @@ fun ToolsScreen(
                 }
             }
 
-            if(selectedIndex == 1){
+            if(options[selectedIndex] == "MAP"){
                 ToolsMapScreen(
                     tools = tools,
                     onToolClick = onToolClick,
@@ -182,6 +184,8 @@ fun ToolsListScreen(
     favoriteTools: List<String>,
     onToggleFavorite: (String) -> Unit
 ){
+    val context = LocalActivity.current as ComponentActivity
+
     LazyVerticalGrid(
         modifier = Modifier
             .padding(top = 128.dp)
@@ -191,7 +195,7 @@ fun ToolsListScreen(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp)
     ){
-        val sortedTools = tools.sortedWith(compareBy ({ it.title !in favoriteTools }, {it.title}))
+        val sortedTools = sortTools(context, tools, favoriteTools)
 
         items(sortedTools) { tool ->
             ToolCard(
@@ -202,6 +206,17 @@ fun ToolsListScreen(
             )
         }
     }
+}
+
+fun sortTools(
+    context: ComponentActivity,
+    tools: List<ToolsDestination>,
+    favoriteTools: List<String>
+): List<ToolsDestination>{
+    return tools
+        .map {it to context.getString(it.titleRessourceId)}
+        .sortedWith(compareBy({it.second !in favoriteTools}, {it.second}))
+        .map{it.first}
 }
 
 @Composable
@@ -300,7 +315,7 @@ fun ToolsMapScreen(
                             )
 
                             Text(
-                                text = tool.title,
+                                text = stringResource(tool.titleRessourceId),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     color = theme.recommendedColor
                                 ),
@@ -326,13 +341,16 @@ fun ToolsMapScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
-                .size(64.dp)
+                .size(64.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.onPrimary,
+            )
         ) {
             Image(
                 painter = painterResource(R.drawable.gps_fixed),
                 contentDescription = "Go back to middle button",
                 modifier = Modifier
-                    .requiredSize(32.dp)
+                    .requiredSize(32.dp),
             )
         }
     }
@@ -394,7 +412,7 @@ fun ToolCard(
                     painter = painterResource(tool.iconId),
                     contentDescription = "${tool.title} icon"
                 )
-                Text(text = tool.title)
+                Text(text = stringResource(tool.titleRessourceId), textAlign = TextAlign.Center)
             }
         }
     }

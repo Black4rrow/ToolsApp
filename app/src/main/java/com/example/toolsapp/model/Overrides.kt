@@ -1,9 +1,6 @@
 package com.example.toolsapp.model
 
-import android.os.Build.VERSION_CODES.Q
-import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
