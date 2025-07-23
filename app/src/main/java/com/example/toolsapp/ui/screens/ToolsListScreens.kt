@@ -215,7 +215,7 @@ fun sortTools(
 ): List<ToolsDestination>{
     return tools
         .map {it to context.getString(it.titleRessourceId)}
-        .sortedWith(compareBy({it.second !in favoriteTools}, {it.second}))
+        .sortedWith(compareBy({it.first.title !in favoriteTools}, {it.second}))
         .map{it.first}
 }
 

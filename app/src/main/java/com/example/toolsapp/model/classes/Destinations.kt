@@ -1,5 +1,6 @@
 package com.example.toolsapp.model.classes
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import com.example.toolsapp.R
 
@@ -7,29 +8,37 @@ interface DestinationItem{
     val route: String
     var title: String
     val iconId: Int
+    val titleRessourceId: Int
+
+    fun getTitleTranslation(context: Context): String{
+        return context.getString(titleRessourceId)
+    }
 }
 
 sealed class Destination(override val route: String): DestinationItem {
     data object Profile : Destination("profile") {
         override var title: String = "Profil"
         override val iconId: Int = R.drawable.ic_launcher_foreground
+        override val titleRessourceId: Int = R.string.profile_nav
     }
 
     data object ToolsList : Destination("tools_list") {
         override var title: String = "Accueil"
         override val iconId: Int = R.drawable.ic_launcher_foreground
+        override val titleRessourceId: Int = R.string.home_nav
     }
 
     data object Settings : Destination("settings") {
         override var title: String = "Paramètres"
         override val iconId: Int = R.drawable.ic_launcher_foreground
+        override val titleRessourceId: Int = R.string.settings_nav
     }
 }
 
 sealed class ToolsDestination(
     override val route: String,
     override var title: String,
-    val titleRessourceId: Int = R.string.no_name,
+    override val titleRessourceId: Int = R.string.no_name,
     override val iconId: Int,
     val requireConnection: Boolean,
 ) : DestinationItem {

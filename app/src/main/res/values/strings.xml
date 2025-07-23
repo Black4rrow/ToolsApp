@@ -79,4 +79,12 @@
     <string name="godly">Godly</string>
     <string name="choose_difficulty">Choose a difficulty</string>
     <string name="unknow" translatable="false">unknow</string>
+    <string name="wtf" translatable="false">WTF?!</string>
+    <string name="perfect">Perfect !</string>
+    <string name="very_good">Very good</string>
+    <string name="good">Good</string>
+    <string name="okay">Okay</string>
+    <string name="huh">Huh</string>
+    <string name="endless">Endless</string>
+    <string name="difficulty_prefix">"Difficulty : "</string>
 </resources>

@@ -75,4 +75,11 @@
     <string name="demon">Démon</string>
     <string name="godly">Divin</string>
     <string name="choose_difficulty">Choisissez une difficulté</string>
+    <string name="perfect">Parfait !</string>
+    <string name="very_good">Très bien</string>
+    <string name="good">Bien</string>
+    <string name="okay">Okay</string>
+    <string name="huh">Hein</string>
+    <string name="endless">Sans fin</string>
+    <string name="difficulty_prefix">"Difficulté : "</string>
 </resources>

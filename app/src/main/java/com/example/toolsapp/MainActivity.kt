@@ -209,12 +209,12 @@ fun MainApp() {
         *ToolsDestination.all.toTypedArray()
     )
 
-    allDestinations[0].title = navigationItems[0].title
-    allDestinations[1].title = navigationItems[1].title
-    allDestinations[2].title = navigationItems[2].title
 
-    val routeTitles = allDestinations.associate { it.route to it.title }
-    val currentTitle = currentRoute?.let { routeTitles[it] } ?: "Mon Application"
+    var currentTitle = stringResource(R.string.unknow)
+    val currentDestination = allDestinations.find { it.route == currentRoute }
+    if (currentDestination != null) {
+        currentTitle = currentDestination.getTitleTranslation(LocalContext.current)
+    }
 
     Scaffold(
         topBar = {
