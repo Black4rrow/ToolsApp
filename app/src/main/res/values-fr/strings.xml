@@ -82,4 +82,13 @@
     <string name="huh">Hein</string>
     <string name="endless">Sans fin</string>
     <string name="difficulty_prefix">"Difficulté : "</string>
+    <string name="resume">Reprendre</string>
+    <string name="change_difficulty">Changer la difficulté</string>
+    <string name="stop_game">Arrêter la partie</string>
+    <string name="combo_prefix">Combo :</string>
+    <string name="max_prefix">Max :</string>
+    <string name="are_you_bot_4">Attends attends, tu es un ordinateur ? 🤨</string>
+    <string name="are_you_bot_1">Oups, je crois que tu as cliqué sans le faire exprès</string>
+    <string name="are_you_bot_2">Ne t\'inquiètes, l\'ordi joue pour toi 😉</string>
+    <string name="are_you_bot_3">Ha ha, arrêtes de cliquer ou je vais croire que tu es un robot 😅</string>
 </resources>

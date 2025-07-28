@@ -27,6 +27,13 @@ val displayFontFamily = FontFamily(
     )
 )
 
+val handwritingFontFamily = FontFamily(
+    Font(
+        googleFont = GoogleFont("Playpen Sans"),
+        fontProvider = provider,
+    )
+)
+
 val baseline = Typography()
 
 val AppTypography = Typography(
@@ -45,5 +52,23 @@ val AppTypography = Typography(
     labelLarge = baseline.labelLarge.copy(fontFamily = bodyFontFamily),
     labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
     labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
+)
+
+val HandwritingTypography = Typography(
+    displayLarge = baseline.displayLarge.copy(fontFamily = handwritingFontFamily),
+    displayMedium = baseline.displayMedium.copy(fontFamily = handwritingFontFamily),
+    displaySmall = baseline.displaySmall.copy(fontFamily = handwritingFontFamily),
+    headlineLarge = baseline.headlineLarge.copy(fontFamily = handwritingFontFamily),
+    headlineMedium = baseline.headlineMedium.copy(fontFamily = handwritingFontFamily),
+    headlineSmall = baseline.headlineSmall.copy(fontFamily = handwritingFontFamily),
+    titleLarge = baseline.titleLarge.copy(fontFamily = handwritingFontFamily),
+    titleMedium = baseline.titleMedium.copy(fontFamily = handwritingFontFamily),
+    titleSmall = baseline.titleSmall.copy(fontFamily = handwritingFontFamily),
+    bodyLarge = baseline.bodyLarge.copy(fontFamily = handwritingFontFamily),
+    bodyMedium = baseline.bodyMedium.copy(fontFamily = handwritingFontFamily),
+    bodySmall = baseline.bodySmall.copy(fontFamily = handwritingFontFamily),
+    labelLarge = baseline.labelLarge.copy(fontFamily = handwritingFontFamily),
+    labelMedium = baseline.labelMedium.copy(fontFamily = handwritingFontFamily),
+    labelSmall = baseline.labelSmall.copy(fontFamily = handwritingFontFamily),
 )
 

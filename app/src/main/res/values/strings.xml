@@ -87,4 +87,14 @@
     <string name="huh">Huh</string>
     <string name="endless">Endless</string>
     <string name="difficulty_prefix">"Difficulty : "</string>
+    <string name="resume">Resume</string>
+    <string name="change_difficulty">Change difficulty</string>
+    <string name="stop_game">Stop game</string>
+    <string name="combo_prefix">Combo :</string>
+    <string name="unknown_diff" translatable="false">\???</string>
+    <string name="max_prefix">Max :</string>
+    <string name="are_you_bot_4">Wait wait, are you a bot ? 🤨</string>
+    <string name="are_you_bot_1">Oops, I think you missed</string>
+    <string name="are_you_bot_2">Don\'t worry, the bot plays for you😉</string>
+    <string name="are_you_bot_3">Ha ha, stop clicking or I\'ll think you\'re a robot 😅</string>
 </resources>

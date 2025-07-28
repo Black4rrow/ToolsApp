@@ -68,6 +68,9 @@ import com.example.toolsapp.ui.screens.ProfileScreen
 import com.example.toolsapp.ui.screens.SettingsScreen
 import com.example.toolsapp.ui.screens.TodoScreen
 import com.example.toolsapp.ui.screens.ToolsScreen
+import com.example.toolsapp.viewModels.UserGameData
+import com.example.toolsapp.viewModels.UserGameDataSingleton
+import com.example.toolsapp.viewModels.UserGameDataViewModel
 import com.example.toolsapp.viewModels.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 
@@ -79,6 +82,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ToolsAppTheme{
                 val userViewModel by viewModels<UserViewModel>()
+                val userGameDataViewModel by viewModels<UserGameDataViewModel>()
                 val authState by userViewModel.authState.collectAsState()
                 var dataLoaded by remember { mutableStateOf(false) }
                 var ignoreInternetCheck by remember { mutableStateOf(false) }
@@ -107,9 +111,10 @@ class MainActivity : ComponentActivity() {
 
                     LaunchedEffect(authState) {
                         if (authState) {
-                            loadDataFromDatabase(userViewModel.getCurrentUserId() ?: "", userViewModel) {
+                            loadDataFromDatabase(userViewModel.getCurrentUserId(), userViewModel) {
                                 dataLoaded = true
                             }
+                            UserGameDataSingleton.loadGameDataFromDatabase(userViewModel.getCurrentUserId())
                         }
                     }
 
@@ -144,6 +149,7 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         saveSettingsToDatabase()
+        UserGameDataSingleton.saveGameDataToDatabase()
     }
 
     fun loadDataFromDatabase(userId: String, userViewModel: UserViewModel, onLoaded: () -> Unit){
