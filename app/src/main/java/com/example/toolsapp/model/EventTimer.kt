@@ -50,4 +50,5 @@ data class EventTimer(
 
         return sdf.format(calendar.time).split(" ")[0]
     }
+
 }

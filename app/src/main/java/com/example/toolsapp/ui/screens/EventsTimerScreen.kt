@@ -118,7 +118,7 @@ fun EventTimersScreen(onBack: () -> Unit) {
 
 
     fun reloadEventTimers() {
-        userId?.let{ uid ->
+        userId.let{ uid ->
             eventTimerViewModel.getEventTimers(uid){ items ->
                 eventTimers = items
             }
