@@ -31,6 +31,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -40,6 +41,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -173,18 +175,30 @@ fun EventTimersScreen(onBack: () -> Unit) {
         }
 
         Button(
-            onClick = {showCreateEventDialog = true},
+            onClick = {
+                if(!isSelecting){
+                    showCreateEventDialog = true
+                }else{
+                    for(id in selectedIds){
+                        eventTimerViewModel.deleteEventTimer(id.toString())
+                    }
+                    reloadEventTimers()
+                    selectedIds = setOf()
+                    isSelecting = false
+                }
+            },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .size(96.dp)
                 .padding(16.dp)
         ) {
 
-            Image(
-                imageVector = Icons.Default.Add,
+            Icon(
+                imageVector = if(isSelecting) Icons.Outlined.Delete else Icons.Default.Add,
                 contentDescription = null,
                 modifier = Modifier
-                    .requiredSize(48.dp)
+                    .requiredSize(48.dp),
+                tint = MaterialTheme.colorScheme.onPrimary
             )
 
         }
