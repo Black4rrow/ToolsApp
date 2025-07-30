@@ -67,7 +67,7 @@
     <string name="event_timer_title">Rappels d\'évènements</string>
     <string name="particles_title">Particules</string>
     <string name="easy">Facile</string>
-    <string name="medium">Normal</string>
+    <string name="normal">Normal</string>
     <string name="bot">Ordinateur</string>
     <string name="hard">Difficile</string>
     <string name="extreme">Extrême</string>
@@ -91,4 +91,10 @@
     <string name="are_you_bot_1">Oups, je crois que tu as cliqué sans le faire exprès</string>
     <string name="are_you_bot_2">Ne t\'inquiètes, l\'ordi joue pour toi 😉</string>
     <string name="are_you_bot_3">Ha ha, arrêtes de cliquer ou je vais croire que tu es un robot 😅</string>
+    <string name="color_scheme_choice">Choix des couleurs</string>
+    <string name="contrast">Contraste</string>
+    <string name="weak">Faible</string>
+    <string name="medium">Moyen</string>
+    <string name="high">Haut</string>
+    <string name="dark">Sombre</string>
 </resources>

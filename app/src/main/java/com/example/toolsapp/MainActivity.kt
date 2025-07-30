@@ -68,6 +68,7 @@ import com.example.toolsapp.ui.screens.ProfileScreen
 import com.example.toolsapp.ui.screens.SettingsScreen
 import com.example.toolsapp.ui.screens.TodoScreen
 import com.example.toolsapp.ui.screens.ToolsScreen
+import com.example.toolsapp.ui.theme.AllColorSchemes
 import com.example.toolsapp.viewModels.UserGameData
 import com.example.toolsapp.viewModels.UserGameDataSingleton
 import com.example.toolsapp.viewModels.UserGameDataViewModel
@@ -80,7 +81,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ToolsAppTheme{
+            val selectedScheme by AppSettingsManager.settings.selectedColorScheme.collectAsState()
+            val selectedContrast by AppSettingsManager.settings.selectedContrast.collectAsState()
+            val selectedIsDark by AppSettingsManager.settings.selectedIsDark.collectAsState()
+
+            ToolsAppTheme(
+                customColorScheme = AllColorSchemes.getSchemeFromNameAndContrastAndIsDark(selectedScheme, selectedContrast, selectedIsDark)
+            ){
                 val userViewModel by viewModels<UserViewModel>()
                 val userGameDataViewModel by viewModels<UserGameDataViewModel>()
                 val authState by userViewModel.authState.collectAsState()

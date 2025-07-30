@@ -70,7 +70,7 @@
     <string name="particles_title">Particles</string>
     <string name="frenzy_clicker_title" translatable="false">FrenzyClicker</string>
     <string name="easy">Easy</string>
-    <string name="medium">Medium</string>
+    <string name="normal">Normal</string>
     <string name="bot">Bot</string>
     <string name="hard">Hard</string>
     <string name="extreme">Extreme</string>
@@ -97,4 +97,10 @@
     <string name="are_you_bot_1">Oops, I think you missed</string>
     <string name="are_you_bot_2">Don\'t worry, the bot plays for you😉</string>
     <string name="are_you_bot_3">Ha ha, stop clicking or I\'ll think you\'re a robot 😅</string>
+    <string name="color_scheme_choice">Color scheme choice</string>
+    <string name="contrast">Contrast</string>
+    <string name="weak">Weak</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="dark">Dark</string>
 </resources>

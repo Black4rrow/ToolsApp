@@ -49,7 +49,7 @@ enum class Difficulty(
 
     MEDIUM(
         value = 2,
-        labelKey = R.string.medium,
+        labelKey = R.string.normal,
         despawnTime = 2000,
         iconId = R.drawable.check,
         baseNumberOfGroups = 999,

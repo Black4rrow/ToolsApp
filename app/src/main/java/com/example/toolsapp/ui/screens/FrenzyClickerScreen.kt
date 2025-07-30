@@ -218,7 +218,6 @@ fun FrenzyClickerScreen(onBack: () -> Unit) {
                     }
                 }
 
-
                 gameManager.playTime =
                     System.currentTimeMillis() - gameManager.startTime - gameManager.totalPausedTime
             }
@@ -270,6 +269,7 @@ fun FrenzyClickerScreen(onBack: () -> Unit) {
                             fontWeight = FontWeight.Bold
                         )
                     )
+
                     Text(
                         modifier = Modifier,
                         text = "(${maxText} ${gameManager.highScore})",
@@ -279,7 +279,6 @@ fun FrenzyClickerScreen(onBack: () -> Unit) {
                             fontWeight = FontWeight.Bold
                         )
                     )
-
 
                     Row {
                         var difficultyText = stringResource(difficulty.labelKey)

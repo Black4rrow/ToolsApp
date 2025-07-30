@@ -3,6 +3,7 @@ package com.example.toolsapp.viewModels
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.toolsapp.model.classes.PersistableSettings
 import com.example.toolsapp.model.classes.Settings
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
@@ -63,14 +64,14 @@ class PreferencesViewModel : ViewModel() {
         }
     }
 
-    fun saveSettingsToDatabase(userId: String, settings: Settings) {
+    fun saveSettingsToDatabase(userId: String, settings: PersistableSettings) {
         mySettingsRef.child(userId).setValue(settings)
     }
 
-    fun loadSettingsFromDatabase(userId: String, onSettingsLoaded: (Settings) -> Unit) {
+    fun loadSettingsFromDatabase(userId: String, onSettingsLoaded: (PersistableSettings) -> Unit) {
         mySettingsRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val settings = snapshot.getValue(Settings::class.java)
+                val settings = snapshot.getValue(PersistableSettings::class.java)
                 settings?.let {
                     onSettingsLoaded(it)
                 }
