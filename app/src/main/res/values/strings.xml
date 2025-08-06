@@ -103,4 +103,15 @@
     <string name="medium">Medium</string>
     <string name="high">High</string>
     <string name="dark">Dark</string>
+    <string name="grid_conqueror_title">Grid conqueror</string>
+    <string name="cannon">Cannon</string>
+    <string name="goliath">Goliath</string>
+    <string name="burst">Burst</string>
+    <string name="restart">Restart</string>
+    <string name="paused">Paused</string>
+    <string name="columns_number">Number of columns</string>
+    <string name="start">Start</string>
+    <string name="single_player">Single player</string>
+    <string name="two_player">Two players</string>
+    <string name="bot_difficulty">Bot difficulty</string>
 </resources>

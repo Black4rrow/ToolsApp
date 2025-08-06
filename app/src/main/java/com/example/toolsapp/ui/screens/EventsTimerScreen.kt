@@ -86,7 +86,7 @@ import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
-fun EventTimersScreen(onBack: () -> Unit) {
+fun EventTimersScreen() {
     val notificationPermissionState = rememberPermissionState(
         Manifest.permission.POST_NOTIFICATIONS
     )

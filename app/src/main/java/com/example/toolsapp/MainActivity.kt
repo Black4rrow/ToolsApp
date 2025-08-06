@@ -63,6 +63,7 @@ import com.example.toolsapp.model.classes.Destination
 import com.example.toolsapp.model.classes.ToolsDestination
 import com.example.toolsapp.ui.screens.EventTimersScreen
 import com.example.toolsapp.ui.screens.FrenzyClickerScreen
+import com.example.toolsapp.ui.screens.GridConquerorScreen
 import com.example.toolsapp.ui.screens.ParticleScreen
 import com.example.toolsapp.ui.screens.ProfileScreen
 import com.example.toolsapp.ui.screens.SettingsScreen
@@ -229,6 +230,8 @@ fun MainApp() {
         currentTitle = currentDestination.getTitleTranslation(LocalContext.current)
     }
 
+    var shouldShowBottomBar = currentDestination?.showBottomBar ?: true
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -254,29 +257,31 @@ fun MainApp() {
             )
         },
         bottomBar = {
-            NavigationBar(
-            ) {
-                navigationItems.forEachIndexed{index, item ->
-                    NavigationBarItem(
-                        selected = selectedNavigationIndex == index,
-                        onClick = {
-                            selectedNavigationIndex = index
-                            navController.navigate(item.route) {
+            if(shouldShowBottomBar) {
+                NavigationBar(
+                ) {
+                    navigationItems.forEachIndexed{index, item ->
+                        NavigationBarItem(
+                            selected = selectedNavigationIndex == index,
+                            onClick = {
+                                selectedNavigationIndex = index
+                                navController.navigate(item.route) {
 
-                                popUpTo(item.route) { inclusive = true }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(imageVector = item.icon, contentDescription = item.title)
-                        },
-                        label = {
-                            Text(
-                                item.title,
-                            )
-                        },
-                    )
+                                    popUpTo(item.route) { inclusive = true }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
+                            icon = {
+                                Icon(imageVector = item.icon, contentDescription = item.title)
+                            },
+                            label = {
+                                Text(
+                                    item.title,
+                                )
+                            },
+                        )
+                    }
                 }
             }
         }
@@ -308,27 +313,23 @@ fun MainApp() {
             }
 
             composable(ToolsDestination.TodoList.route) {
-                TodoScreen(
-                    onBack = { navController.popBackStack()}
-                )
+                TodoScreen()
             }
 
             composable(ToolsDestination.EventTimers.route) {
-                EventTimersScreen(
-                    onBack = { navController.popBackStack() }
-                )
+                EventTimersScreen()
             }
 
             composable(ToolsDestination.Particles.route) {
-                ParticleScreen(
-                    onBack = { navController.popBackStack() }
-                )
+                ParticleScreen()
             }
 
             composable(ToolsDestination.FrenzyClicker.route) {
-                FrenzyClickerScreen(
-                    onBack = { navController.popBackStack() }
-                )
+                FrenzyClickerScreen()
+            }
+
+            composable(ToolsDestination.GridConqueror.route){
+                GridConquerorScreen()
             }
         }
     }

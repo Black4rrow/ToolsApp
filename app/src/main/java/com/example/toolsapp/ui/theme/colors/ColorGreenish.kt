@@ -449,7 +449,3 @@ object ColorGreenish{
         surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
     )
 }
-
-val levelBarIndicatorBackgroud = Color(0xFF8F7E70)
-val levelBarIndicatorForeground = Color(0xFFD5BDAF)
-val favoriteColor = Color(0xFFFFC107)

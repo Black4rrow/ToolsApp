@@ -35,6 +35,7 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.toolsapp.R
+import com.example.toolsapp.model.Utils
 import com.example.toolsapp.model.classes.AppSettingsManager
 import com.example.toolsapp.model.classes.Theme
 import com.example.toolsapp.model.classes.ToolsThemeTypes

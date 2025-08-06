@@ -77,7 +77,7 @@ import kotlin.time.Duration.Companion.days
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoScreen(onBack: () -> Unit) {
+fun TodoScreen() {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
     val screenWidth = configuration.screenWidthDp.dp
@@ -329,11 +329,4 @@ fun TodoScreen(onBack: () -> Unit) {
             }
         }
     }
-}
-
-
-@Preview
-@Composable
-fun TodoScreenPreview() {
-    TodoScreen(onBack = {})
 }

@@ -102,7 +102,7 @@ var showAreYouBotMessage = false
 var areYouBotCount = 0
 
 @Composable
-fun FrenzyClickerScreen(onBack: () -> Unit) {
+fun FrenzyClickerScreen() {
     val gameManager = remember { FrenzyClickerGameManager() }
     val activeCircles = remember { mutableStateListOf<Circle>() }
     val feedbackCircles = remember { mutableStateListOf<Circle>() }

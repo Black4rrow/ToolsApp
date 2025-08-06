@@ -20,9 +20,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModelProvider
 import com.example.toolsapp.R
+import com.example.toolsapp.model.Utils
 import com.example.toolsapp.model.classes.AppSettingsManager
-import com.example.toolsapp.ui.theme.colors.levelBarIndicatorBackgroud
-import com.example.toolsapp.ui.theme.colors.levelBarIndicatorForeground
+import com.example.toolsapp.ui.theme.levelBarIndicatorBackgroud
+import com.example.toolsapp.ui.theme.levelBarIndicatorForeground
 import com.example.toolsapp.viewModels.UserViewModel
 
 @Composable

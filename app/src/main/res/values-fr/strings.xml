@@ -97,4 +97,15 @@
     <string name="medium">Moyen</string>
     <string name="high">Haut</string>
     <string name="dark">Sombre</string>
+    <string name="grid_conqueror_title">Maître de la grille</string>
+    <string name="cannon">Canon</string>
+    <string name="goliath">Goliath</string>
+    <string name="burst">Rafale</string>
+    <string name="restart">Recommencer</string>
+    <string name="paused">En pause</string>
+    <string name="columns_number">Nombre de colonnes</string>
+    <string name="start">Commencer</string>
+    <string name="single_player">Solo</string>
+    <string name="two_player">Deux joueurs</string>
+    <string name="bot_difficulty">Difficulté de l\'ordinateur</string>
 </resources>

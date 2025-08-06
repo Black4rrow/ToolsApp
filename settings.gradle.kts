@@ -9,8 +9,12 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        mavenLocal()
+        maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
+        maven { url = uri("https://jitpack.io")}
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

@@ -81,7 +81,7 @@ import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
-fun ParticleScreen(onBack: () -> Unit) {
+fun ParticleScreen() {
     var pickedColor by remember { mutableStateOf(Color.Red) }
     var showChangeColorDialog by remember { mutableStateOf(false) }
     var showSettingsDialog by remember { mutableStateOf(false) }
